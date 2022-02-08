@@ -3,12 +3,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 #Opens up web driver and goes to Google Images
+
+train = True
+
+pokemon = "pikachu"
+q = "image" if train else "drawings"
+
 driver = webdriver.Chrome(executable_path=r"C:/Users/dassu/Downloads/chromedriver_win32/chromedriver.exe")
 driver.get('https://images.google.com/?gws_rd=ssl')
 
 box = driver.find_element_by_xpath('//*[@id="sbtc"]/div[2]/div[2]/input')
 
-box.send_keys('emolga drawings')
+box.send_keys('{pokemon} {q}')
 box.send_keys(Keys.ENTER)
 
 last_height = driver.execute_script('return document.body.scrollHeight')
@@ -27,7 +33,7 @@ while True:
 
 for i in range(100):
     try:
-        driver.find_element_by_xpath('//*[@id="islrg"]/div[1]/div['+str(i)+']/a[1]/div[1]/img').screenshot(f"test/emolga/{i}.png")
+        driver.find_element_by_xpath('//*[@id="islrg"]/div[1]/div['+str(i)+']/a[1]/div[1]/img').screenshot(f"test/{pokemon}/{i}.png")
     except:
         pass
 
